@@ -2,6 +2,7 @@ package com.myfirstproject;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -9,6 +10,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
+
+import static com.myfirstproject.utils.ThreadSleepUtil.threadSleepUtil;
 
 public class day03_Locators {
     /*
@@ -18,6 +21,8 @@ public class day03_Locators {
       And enter password
       And click on submit button
       Then verify the login is successful
+      Then logout the application
+      Then verify the logout is successful
 
      */
     WebDriver driver;
@@ -33,22 +38,33 @@ public class day03_Locators {
     @After
     public void tearDown(){
 //        this method will be used for after conditions
-        driver.quit();
+      driver.quit();
     }
     @Test
-    public void loginTest(){
+    public void loginTest()  {
 //        locating username
         driver.findElement(By.name("username")).sendKeys("Admin");
 //        locating password
         driver.findElement(By.name("password")).sendKeys("admin123");
 //        locating button
         driver.findElement(By.tagName("button")).click();
-
-        /*
-           Homework : verify if login is successful
-           verify if the URL contains "dashboard" keyword
-           if URL contains dashboard login is successful or else unsuccessful
-        */
+//          Then verify the login is successful
+        String actualURL = driver.getCurrentUrl();
+        String expectedKeyword = "dashboard";
+//          Then verify the login is successful
+        Assert.assertTrue(actualURL.contains(expectedKeyword));
+//        putting hard wait. this is a JAVA wait. i want to wait for 3 seconds
+        threadSleepUtil(3000);
+        //Thread.sleep(3000);
+//        locating the menu
+        driver.findElement(By.className("oxd-userdropdown-tab")).click();
+//        putting hard wait
+        threadSleepUtil(3000);
+        //Thread.sleep(3000);
+//        locating logout option
+        driver.findElement(By.linkText("Logout")).click();
+//        Then verify the logout is successful
+        Assert.assertTrue(driver.findElement(By.xpath("//h5[@class=\"oxd-text oxd-text--h5 orangehrm-login-title\"]")).isDisplayed());
 
     }
 

@@ -38,8 +38,8 @@ public class day03_homework01 {
         String actualURL = driver.getCurrentUrl();
         String expectedKeyword = "dashboard";
 
-    /*
 
+    /*
         // Verification:
         if (actualURL.contains(expectedKeyword)){
             System.out.println("Test Passed");
@@ -49,9 +49,10 @@ public class day03_homework01 {
             System.out.println("actualURL = " + actualURL);
             System.out.println(actualURL+" does not contain "+expectedKeyword);
         }
-    */
+     */
         // Assertion
         Assert.assertTrue(actualURL.contains(expectedKeyword));
+
     }
 
 

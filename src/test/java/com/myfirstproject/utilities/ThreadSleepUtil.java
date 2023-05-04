@@ -1,4 +1,4 @@
-package com.myfirstproject.utils;
+package com.myfirstproject.utilities;
 
 public class ThreadSleepUtil {
 

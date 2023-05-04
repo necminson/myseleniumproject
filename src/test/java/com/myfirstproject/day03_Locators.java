@@ -28,7 +28,7 @@ public class day03_Locators {
     WebDriver driver;
     @Before
     public void setUp(){
-//        this method will be used for precondition
+//      this method will be used for precondition
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
@@ -37,25 +37,30 @@ public class day03_Locators {
     }
     @After
     public void tearDown(){
-//        this method will be used for after conditions
+     //  this method will be used for after conditions
       driver.quit();
     }
     @Test
     public void loginTest()  {
 //        locating username
-        driver.findElement(By.name("username")).sendKeys("Admin");
-//        locating password
+       driver.findElement(By.name("username")).sendKeys("Admin");
+       //        locating password
         driver.findElement(By.name("password")).sendKeys("admin123");
 //        locating button
         driver.findElement(By.tagName("button")).click();
+
 //          Then verify the login is successful
         String actualURL = driver.getCurrentUrl();
         String expectedKeyword = "dashboard";
-//          Then verify the login is successful
+
+//        Then verify the login is successful
         Assert.assertTrue(actualURL.contains(expectedKeyword));
+
 //        putting hard wait. this is a JAVA wait. i want to wait for 3 seconds
         threadSleepUtil(3000);
+
         //Thread.sleep(3000);
+
 //        locating the menu
         driver.findElement(By.className("oxd-userdropdown-tab")).click();
 //        putting hard wait
@@ -65,7 +70,6 @@ public class day03_Locators {
         driver.findElement(By.linkText("Logout")).click();
 //        Then verify the logout is successful
         Assert.assertTrue(driver.findElement(By.xpath("//h5[@class=\"oxd-text oxd-text--h5 orangehrm-login-title\"]")).isDisplayed());
-
     }
 
 }

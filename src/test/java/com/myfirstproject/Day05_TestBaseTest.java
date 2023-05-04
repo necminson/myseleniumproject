@@ -1,3 +1,5 @@
+package com.myfirstproject;
+
 import com.myfirstproject.utilities.TestBase;
 import org.junit.Test;
 

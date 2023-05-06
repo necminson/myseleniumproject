@@ -24,6 +24,7 @@ public class RadioButton extends TestBase {
         WebElement maleElement= driver.findElement(By.xpath("(//input[@type='radio'])[2]"));
         maleElement.click();
 
+
         //Enter first name and last name
        String firstName = obj.name().firstName();
        String lastName = obj.name().lastName();

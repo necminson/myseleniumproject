@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
 
-import static com.myfirstproject.utilities.ThreadSleepUtil.threadSleepUtil;
+import static com.myfirstproject.utilities.ThreadSleepUtil.waitFor;
 
 
 public class Q01_Navigations {
@@ -33,18 +33,18 @@ public class Q01_Navigations {
        driver.manage().window().maximize();
        // Open google home page https://www.google.com/
        driver.get("https://www.google.com/");
-       threadSleepUtil(2000);
+       waitFor(2000);
        // Navigate to techproeducation home page https://techproeducation.com/
-       threadSleepUtil(2000);
+       waitFor(2000);
        driver.navigate().to("https://techproeducation.com/");
        // Navigate back to google
-       threadSleepUtil(2000);
+       waitFor(2000);
        driver.navigate().back();
        // Navigate forward to techproeducation
-       threadSleepUtil(2000);
+       waitFor(2000);
        driver.navigate().forward();
        // Refresh the page
-       threadSleepUtil(2000);
+       waitFor(2000);
        driver.navigate().refresh();
        // Close/Quit the browser
        driver.close();

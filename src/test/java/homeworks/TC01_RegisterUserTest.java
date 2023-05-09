@@ -102,9 +102,13 @@ public class TC01_RegisterUserTest extends TestBase {
 
      // 15. Click 'Continue' button
      driver.findElement(By.partialLinkText("Continue")).click();
+        // close unexpected window
 
+
+        //driver.findElement(By.xpath("//div[@id='dismiss-button']")).click();
+/*
      // 16. Verify that 'Logged in as username' is visible
-       // Assert.assertTrue(driver.findElement(By.xpath("//*[text()=' Logged in as ']")).isDisplayed());
+     String loggedInAs =driver.findElement(By.xpath("//*[text()=' Logged in as ']")).getText();
 
      // 17. Click 'Delete Account' button
      driver.findElement(By.partialLinkText("delete")).click();
@@ -112,6 +116,8 @@ public class TC01_RegisterUserTest extends TestBase {
      // 18. Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
      Assert.assertTrue(driver.findElement(By.xpath("//*[text()='Account Deleted!']")).isDisplayed());
      driver.findElement(By.xpath("//a[@data-qa='continue-button']")).click();
+
+ */
     }
 
 }

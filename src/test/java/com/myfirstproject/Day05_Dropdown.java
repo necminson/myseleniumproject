@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
-import static com.myfirstproject.utilities.ThreadSleepUtil.threadSleepUtil;
+import static com.myfirstproject.utilities.ThreadSleepUtil.waitFor;
 
 public class Day05_Dropdown extends TestBase {
     @Test
@@ -43,11 +43,11 @@ public class Day05_Dropdown extends TestBase {
         WebElement dropdown = driver.findElement(By.id("dropdown"));
         Select options = new Select(dropdown);
         options.selectByVisibleText("Option 1");
-        threadSleepUtil(3000);
+        waitFor(3000);
         options.selectByVisibleText("Option 2");
-        threadSleepUtil(3000);
+        waitFor(3000);
         options.selectByVisibleText("Option 1");
-        threadSleepUtil(3000);
+        waitFor(3000);
         options.selectByVisibleText("Option 2");
 
 

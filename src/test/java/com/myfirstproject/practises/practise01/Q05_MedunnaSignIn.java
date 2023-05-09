@@ -24,7 +24,9 @@ public class Q05_MedunnaSignIn extends TestBase {
         // click on "sign in" submit button
         driver.findElement(By.xpath("//button[@type='submit']")).click();
         //Assert that you sign in
-        Assert.assertTrue(driver.findElement(By.xpath("//*[text()='Mark Twain']")).isDisplayed());
+        String actualSignUpName= driver.findElement(By.xpath("//*[text()='Mark Twain']")).getText();
+        String expectedSignUpName="Mark Twain";
+        Assert.assertEquals(expectedSignUpName,actualSignUpName);
     }
 
 }

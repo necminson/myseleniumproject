@@ -5,12 +5,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
-import static com.myfirstproject.utilities.ThreadSleepUtil.threadSleepUtil;
+import static com.myfirstproject.utilities.ThreadSleepUtil.waitFor;
 
 public class Day07_WindowHandle1 extends TestBase {
 
@@ -60,18 +57,18 @@ public class Day07_WindowHandle1 extends TestBase {
         String actualTitlePage01 = driver.switchTo().window(window1Handle).getTitle(); // switching the window1 and getting the title
         String expectedTitlePage01 = "The Internet";
         Assert.assertEquals(actualTitlePage01,expectedTitlePage01);
-        threadSleepUtil(5000);
+        waitFor(5000);
 
         // SWITCH BACK TO WINDOW 2
            driver.switchTo().window(window2Handle);
-           threadSleepUtil(5000);
+           waitFor(5000);
 
         // SWITCH BACK TO WINDOW 1
         driver.switchTo().window(window1Handle);
-        threadSleepUtil(5000);
+        waitFor(5000);
 
         // SWITCH BACK TO WINDOW 2
         driver.switchTo().window(window2Handle);
-        threadSleepUtil(5000);
+        waitFor(5000);
     }
 }

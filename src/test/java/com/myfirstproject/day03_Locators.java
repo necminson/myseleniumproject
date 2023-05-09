@@ -11,7 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
 
-import static com.myfirstproject.utilities.ThreadSleepUtil.threadSleepUtil;
+import static com.myfirstproject.utilities.ThreadSleepUtil.waitFor;
 
 public class day03_Locators {
     /*
@@ -57,14 +57,14 @@ public class day03_Locators {
         Assert.assertTrue(actualURL.contains(expectedKeyword));
 
 //        putting hard wait. this is a JAVA wait. i want to wait for 3 seconds
-        threadSleepUtil(3000);
+        waitFor(3000);
 
         //Thread.sleep(3000);
 
 //        locating the menu
         driver.findElement(By.className("oxd-userdropdown-tab")).click();
 //        putting hard wait
-        threadSleepUtil(3000);
+        waitFor(3000);
         //Thread.sleep(3000);
 //        locating logout option
         driver.findElement(By.linkText("Logout")).click();

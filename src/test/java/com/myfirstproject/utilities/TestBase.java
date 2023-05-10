@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
 
-import static com.myfirstproject.utilities.ThreadSleepUtil.waitFor;
+import static com.myfirstproject.utilities.ThreadSleepUtil.waitUpTo;
 
 public abstract class TestBase {
     protected static WebDriver driver;
@@ -22,7 +22,7 @@ public abstract class TestBase {
     }
     @After
     public void tearDown(){
-        waitFor(5000);
+        waitUpTo(5000);
         driver.quit();
     }
 }

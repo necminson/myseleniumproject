@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.WindowType;
 
-import static com.myfirstproject.utilities.ThreadSleepUtil.waitFor;
+import static com.myfirstproject.utilities.ThreadSleepUtil.waitUpTo;
 
 public class Day07_WindowHandle2 extends TestBase {
         /*
@@ -18,31 +18,31 @@ public class Day07_WindowHandle2 extends TestBase {
         driver.get("https://www.amazon.com");
         Assert.assertTrue(driver.getTitle().contains("Amazon"));
         String amazonWindowHandle = driver.getWindowHandle();
-        waitFor(5000);
+        waitUpTo(5000);
         //        linkedIn title test
         driver.switchTo().newWindow(WindowType.TAB);// Create a NEW TAB and SWITCH TO IT
         driver.get("https://www.linkedin.com");
         Assert.assertTrue(driver.getTitle().contains("LinkedIn"));
         String linkedInWindowHandle = driver.getWindowHandle();
-        waitFor(5000);
+        waitUpTo(5000);
         //        ebay title test
         driver.switchTo().newWindow(WindowType.TAB);
         driver.get("https://www.ebay.com");
         Assert.assertTrue(driver.getTitle().contains("eBay"));
         String ebayWindowHandle= driver.getWindowHandle();
-        waitFor(5000);
+        waitUpTo(5000);
 
     // At this point driver is on EBAY, but I can switch to AMAZON or LinkedIn
 
         driver.switchTo().window(amazonWindowHandle); // driver is on the amazon now
         String amazonTitle = driver.getTitle();
         System.out.println("amazonTitle = " + amazonTitle);
-        waitFor(5000);
+        waitUpTo(5000);
 
         driver.switchTo().window(linkedInWindowHandle); // driver is on the LinkedIn now
         String linkedInTitle = driver.getTitle();
         System.out.println("linkedInTitle = " + linkedInTitle);
-        waitFor(5000);
+        waitUpTo(5000);
 
         driver.switchTo().window(ebayWindowHandle); // driver is on the ebay now
         String ebayTitle = driver.getTitle();
@@ -58,36 +58,36 @@ public class Day07_WindowHandle2 extends TestBase {
         driver.get("https://www.amazon.com");
         Assert.assertTrue(driver.getTitle().contains("Amazon"));
         String amazonWindowHandle = driver.getWindowHandle();
-        waitFor(5000);
+        waitUpTo(5000);
         //        linkedIn title test
         driver.switchTo().newWindow(WindowType.WINDOW);// Create a NEW WINDOW and SWITCH TO IT
         driver.get("https://www.linkedin.com");
         Assert.assertTrue(driver.getTitle().contains("LinkedIn"));
         String linkedInWindowHandle = driver.getWindowHandle();
-        waitFor(5000);
+        waitUpTo(5000);
         //        ebay title test
         driver.switchTo().newWindow(WindowType.WINDOW);
         driver.get("https://www.ebay.com");
         Assert.assertTrue(driver.getTitle().contains("eBay"));
         String ebayWindowHandle= driver.getWindowHandle();
-        waitFor(5000);
+        waitUpTo(5000);
 
         // At this point driver is on EBAY, but I can switch to AMAZON or LinkedIn
 
         driver.switchTo().window(amazonWindowHandle); // driver is on the amazon now
         String amazonTitle = driver.getTitle();
         System.out.println("amazonTitle = " + amazonTitle);
-        waitFor(5000);
+        waitUpTo(5000);
 
         driver.switchTo().window(linkedInWindowHandle); // driver is on the LinkedIn now
         String linkedInTitle = driver.getTitle();
         System.out.println("linkedInTitle = " + linkedInTitle);
-        waitFor(5000);
+        waitUpTo(5000);
 
         driver.switchTo().window(ebayWindowHandle); // driver is on the ebay now
         String ebayTitle = driver.getTitle();
         System.out.println("ebayTitle = " + ebayTitle);
-        waitFor(5000);
+        waitUpTo(5000);
     }
     /*  INTERVIEW QUESTION
             What do you do when your automation script FAILS?

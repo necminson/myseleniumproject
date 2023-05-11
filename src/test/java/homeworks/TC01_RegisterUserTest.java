@@ -44,6 +44,7 @@ public class TC01_RegisterUserTest extends TestBase {
 
 
     // 9. Fill details: Title, Name, Email, Password, Date of birth
+    driver.findElement(By.id("id_gender1")).click();
     // Name & Email automatically filled.
     // Fill Password
     String fakePassword = faker.internet().password();
@@ -106,10 +107,11 @@ public class TC01_RegisterUserTest extends TestBase {
 
 
         //driver.findElement(By.xpath("//div[@id='dismiss-button']")).click();
-/*
-     // 16. Verify that 'Logged in as username' is visible
-     String loggedInAs =driver.findElement(By.xpath("//*[text()=' Logged in as ']")).getText();
 
+     // 16. Verify that 'Logged in as username' is visible
+     String loggedInAs =driver.findElement(By.xpath("//*[@class='fa fa-user']")).getText();
+        System.out.println("loggedInAs = " + loggedInAs);
+/*
      // 17. Click 'Delete Account' button
      driver.findElement(By.partialLinkText("delete")).click();
 

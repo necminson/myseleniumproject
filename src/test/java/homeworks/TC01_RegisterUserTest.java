@@ -6,7 +6,18 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.sql.Driver;
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.myfirstproject.utilities.ThreadSleepUtil.waitUpTo;
 
 public class TC01_RegisterUserTest extends TestBase {
     Faker faker;
@@ -16,6 +27,8 @@ public class TC01_RegisterUserTest extends TestBase {
     //  1. Launch browser
     //  2. Navigate to url 'http://automationexercise.com'
     driver.get("http://automationexercise.com");
+
+
     // 3. Verify that home page is visible successfully
     String actualURL = driver.getCurrentUrl();
     String expectedURL= "https://automationexercise.com/";
@@ -100,26 +113,71 @@ public class TC01_RegisterUserTest extends TestBase {
      // 14. Verify that 'ACCOUNT CREATED!' is visible
      boolean accountCreated = driver.findElement(By.xpath("//b")).isDisplayed();
      Assert.assertTrue(accountCreated);
+        waitUpTo(2000);
 
      // 15. Click 'Continue' button
      driver.findElement(By.partialLinkText("Continue")).click();
-        // close unexpected window
 
-
-        //driver.findElement(By.xpath("//div[@id='dismiss-button']")).click();
 
      // 16. Verify that 'Logged in as username' is visible
-     String loggedInAs =driver.findElement(By.xpath("//*[@class='fa fa-user']")).getText();
-        System.out.println("loggedInAs = " + loggedInAs);
+        waitUpTo(2000);
+
+
+        //There are two type iframes appear randomly:
 /*
+         if(driver.getCurrentUrl().contains("#google_vignette")){
+             try {
+                 Actions actions = new Actions(driver);
+                 actions.click(driver.findElement(By.xpath("//div[@id='dismiss-button']")));
+
+             } catch (Exception e) {
+                 throw new RuntimeException(e);
+
+             }
+         }
+
+
+ */ //.switchTo().frame("ad_iframe")
+        List<String> frames = new ArrayList<>();
+        frames.add("aswift_2");
+        frames.add("aswift_3");
+        for ( String fName: frames) {
+            if (fName.equals("aswift_2")){
+                WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("aswift_2")));
+                driver.switchTo().frame(fName).switchTo().frame("ad_iframe");
+                driver.findElement(By.xpath("//div[@id='dismiss-button']")).click();
+                    driver.switchTo().defaultContent();
+
+            } else if (fName.equals("aswift_3")) {
+                WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("aswift_3")));
+                driver.switchTo().frame(fName).switchTo().frame("ad_iframe");
+                driver.findElement(By.xpath("//div[@id='dismiss-button']")).click();
+                driver.switchTo().defaultContent();
+
+            }
+            else {
+                System.out.println("Advertisement does not exist");
+                   break;
+            }
+        }
+
+        WebElement loggedInAsElement = driver.findElement(By.xpath("//a[text()=' Logged in as ']"));
+        String loggedInAs =loggedInAsElement.getText();
+        System.out.println("loggedInAs = " + loggedInAs);
+
+
+        waitUpTo(3000);
+
      // 17. Click 'Delete Account' button
-     driver.findElement(By.partialLinkText("delete")).click();
+     driver.findElement(By.xpath("//a[@href='/delete_account']")).click();
 
      // 18. Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
      Assert.assertTrue(driver.findElement(By.xpath("//*[text()='Account Deleted!']")).isDisplayed());
      driver.findElement(By.xpath("//a[@data-qa='continue-button']")).click();
 
- */
+
     }
 
 }

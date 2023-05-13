@@ -19,7 +19,7 @@ public class Day06_Iframe extends TestBase {
         /*
         NOTE: I have to switch to the frame otherwise I will get no such element exception when
         I try to locate button
-        When I switch to the frame I will locate the element and wil not get no such element exception
+        When I switch to the frame I will locate the element and will not get no such element exception
          */
 //        driver.switchTo().frame(0);//1. switching to the first frame by index
 //         driver.switchTo().frame("name or id of the frame element");//2. SKIP cause there is no id or name of the frame

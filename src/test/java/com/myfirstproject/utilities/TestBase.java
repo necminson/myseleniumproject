@@ -42,7 +42,7 @@ public abstract class TestBase {
         extentReports.setSystemInfo("Test Environment","Regression");
         extentReports.setSystemInfo("Browser","Chrome");
         extentReports.setSystemInfo("Team Name","Eagles");
-        extentReports.setSystemInfo("SQA","Seren");
+        extentReports.setSystemInfo("SQA","Necmettin");
         extentReports.setSystemInfo("Feature Number","FE1056");
 //        ***********DOCUMENT INFORMATION************************
         extentHtmlReporter.config().setReportName("My Regression Report");
@@ -95,6 +95,23 @@ public abstract class TestBase {
         String path = System.getProperty("user.dir")+"/test-output/ElementScreenshot/"+now+"image.png";
         FileUtils.copyFile(image,new File(path));
     }
-
+ /*
+    This method captures image and returns the path of that image
+    RETURN TYPE : static String
+    return new File(path).getAbsolutePath()
+     */
+ public static String takeScreenshotOfTheEntirePageAsString() throws IOException {
+//        1. TakeScreenShot class with getScreenShotAs method to capture the screenshot
+     File image = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+//        2. Create a path to save the image
+//        Create a date for giving dynamic name otherwise the screenshots overrides
+     String now = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());//getting local date in this format
+//                     CURRENT PROJECT FOLDER         foldername   subfoldername imagename
+     String path = System.getProperty("user.dir")+"/test-output/Screenshots/"+now+"image.png";
+//        3. Save the image in the path as a file
+     FileUtils.copyFile(image,new File(path));
+//        GETTING THE ABSOLUTE PATH OF THE IMAGE PATH THAT IS STRING
+     return new File(path).getAbsolutePath();
+ }
     }
 

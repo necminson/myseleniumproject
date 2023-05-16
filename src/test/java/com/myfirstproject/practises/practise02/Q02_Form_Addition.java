@@ -1,4 +1,4 @@
-package com.myfirstproject.practises.practise01.practise02;
+package com.myfirstproject.practises.practise02;
 
 import com.github.javafaker.Faker;
 import com.myfirstproject.utilities.TestBase;

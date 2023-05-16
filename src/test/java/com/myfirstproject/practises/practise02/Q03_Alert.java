@@ -1,4 +1,4 @@
-package com.myfirstproject.practises.practise01.practise02;
+package com.myfirstproject.practises.practise02;
 
 import com.myfirstproject.utilities.TestBase;
 import org.junit.Assert;

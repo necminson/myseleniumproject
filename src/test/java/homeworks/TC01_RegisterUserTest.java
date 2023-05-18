@@ -6,18 +6,16 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.sql.Driver;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.myfirstproject.utilities.ThreadSleepUtil.waitUpTo;
+import static com.myfirstproject.utilities.ReusableMethodsUtils.clickByJS;
+import static com.myfirstproject.utilities.ReusableMethodsUtils.waitFor;
 
 public class TC01_RegisterUserTest extends TestBase {
     Faker faker;
@@ -34,7 +32,8 @@ public class TC01_RegisterUserTest extends TestBase {
     String expectedURL= "https://automationexercise.com/";
     Assert.assertEquals(expectedURL,actualURL);
     //  4. Click on 'Signup / Login' button
-    driver.findElement(By.xpath("//*[@href='/login']")).click();
+    WebElement loginButton = driver.findElement(By.xpath("//*[@href='/login']"));
+    clickByJS(loginButton);
     //  5. Verify 'New User Signup!' is visible
     boolean newUserSignUp = driver.findElement(By.xpath("(//h2)[3]")).isDisplayed();
     Assert.assertTrue(newUserSignUp);
@@ -49,15 +48,16 @@ public class TC01_RegisterUserTest extends TestBase {
     driver.findElement(By.xpath("(//input[@name='email'])[2]")).sendKeys(fakeEmail);
 
     // 7. Click 'Signup' button
-    driver.findElement(By.xpath("//button[@data-qa='signup-button']")).click();
-
+    WebElement signUpButton = driver.findElement(By.xpath("//button[@data-qa='signup-button']"));
+    clickByJS(signUpButton);
     // 8. Verify that 'ENTER ACCOUNT INFORMATION' is visible
     boolean enterAccInfo = driver.findElement(By.xpath("//b")).isDisplayed();
     Assert.assertTrue(enterAccInfo);
 
 
     // 9. Fill details: Title, Name, Email, Password, Date of birth
-    driver.findElement(By.id("id_gender1")).click();
+    WebElement gender1 = driver.findElement(By.id("id_gender1"));
+    clickByJS(gender1);
     // Name & Email automatically filled.
     // Fill Password
     String fakePassword = faker.internet().password();
@@ -113,14 +113,14 @@ public class TC01_RegisterUserTest extends TestBase {
      // 14. Verify that 'ACCOUNT CREATED!' is visible
      boolean accountCreated = driver.findElement(By.xpath("//b")).isDisplayed();
      Assert.assertTrue(accountCreated);
-        waitUpTo(2000);
+        waitFor(2000);
 
      // 15. Click 'Continue' button
-     driver.findElement(By.partialLinkText("Continue")).click();
-
+     WebElement continueButton = driver.findElement(By.partialLinkText("Continue"));
+     clickByJS(continueButton);
 
      // 16. Verify that 'Logged in as username' is visible
-        waitUpTo(2000);
+        waitFor(2000);
 
 
         //There are two type iframes appear randomly:
@@ -146,14 +146,16 @@ public class TC01_RegisterUserTest extends TestBase {
                 WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
                 wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("aswift_2")));
                 driver.switchTo().frame(fName).switchTo().frame("ad_iframe");
-                driver.findElement(By.xpath("//div[@id='dismiss-button']")).click();
-                    driver.switchTo().defaultContent();
+                WebElement closeButton= driver.findElement(By.xpath("//div[@id='dismiss-button']"));
+                clickByJS(closeButton);
+                driver.switchTo().defaultContent();
 
             } else if (fName.equals("aswift_3")) {
                 WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
                 wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("aswift_3")));
                 driver.switchTo().frame(fName).switchTo().frame("ad_iframe");
-                driver.findElement(By.xpath("//div[@id='dismiss-button']")).click();
+                WebElement closeButton= driver.findElement(By.xpath("//div[@id='dismiss-button']"));
+                clickByJS(closeButton);
                 driver.switchTo().defaultContent();
 
             }
@@ -168,7 +170,7 @@ public class TC01_RegisterUserTest extends TestBase {
         System.out.println("loggedInAs = " + loggedInAs);
 
 
-        waitUpTo(3000);
+        waitFor(3000);
 
      // 17. Click 'Delete Account' button
      driver.findElement(By.xpath("//a[@href='/delete_account']")).click();

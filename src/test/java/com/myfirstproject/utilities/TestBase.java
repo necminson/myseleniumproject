@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
 
-import static com.myfirstproject.utilities.ThreadSleepUtil.waitUpTo;
+import static com.myfirstproject.utilities.ReusableMethodsUtils.waitFor;
 
 public abstract class TestBase {
     protected static WebDriver driver;
@@ -68,7 +68,7 @@ public abstract class TestBase {
     }
     @After
     public void tearDown(){
-        waitUpTo(5000);
+        waitFor(5000);
         driver.quit();
     }
     /*

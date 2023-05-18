@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import static com.myfirstproject.utilities.ThreadSleepUtil.waitUpTo;
+import static com.myfirstproject.utilities.ReusableMethodsUtils.waitFor;
 
 public class Q02_IfElse {
     // Set Driver Path
@@ -35,7 +35,7 @@ public class Q02_IfElse {
         // Open google home page https://www.google.com/
         driver.get("https://www.google.com/");
         // Wait for 3 seconds
-        waitUpTo(3000);
+        waitFor(3000);
         // Go to the "https://techproeducation.com/"
         driver.navigate().to("https://techproeducation.com/");
         // Get the title and URL of the page
@@ -76,7 +76,7 @@ public class Q02_IfElse {
         // Refresh the page
         driver.navigate().refresh();
         // Wait for 3 seconds
-        waitUpTo(3000);
+        waitFor(3000);
         // Close the browser
         driver.close();
     }

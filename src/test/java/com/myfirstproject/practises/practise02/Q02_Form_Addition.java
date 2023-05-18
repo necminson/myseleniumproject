@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import static com.myfirstproject.utilities.ThreadSleepUtil.waitUpTo;
+import static com.myfirstproject.utilities.ReusableMethodsUtils.waitFor;
 
 public class Q02_Form_Addition extends TestBase {
 
@@ -28,7 +28,7 @@ public class Q02_Form_Addition extends TestBase {
         int result =num2+num1;
 
        driver.findElement(By.id("number")).sendKeys(result+"");
-      waitUpTo(2000);
+      waitFor(2000);
         //Click on 'SUBMIT'
         driver.findElement(By.id("demo")).click();
         //Assert that the form has been sent

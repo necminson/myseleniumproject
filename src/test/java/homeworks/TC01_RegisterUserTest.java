@@ -14,8 +14,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.myfirstproject.utilities.ReusableMethodsUtils.clickByJS;
-import static com.myfirstproject.utilities.ReusableMethodsUtils.waitFor;
+import static com.myfirstproject.utilities.ReusableMethodsUtils.*;
 
 public class TC01_RegisterUserTest extends TestBase {
     Faker faker;
@@ -108,8 +107,8 @@ public class TC01_RegisterUserTest extends TestBase {
      driver.findElement(By.id("mobile_number")).sendKeys(fakePhoneNumber);
 
      // 13. Click 'Create Account button'
-     driver.findElement(By.xpath("//*[@data-qa='create-account']")).click();
-
+     WebElement createAccountButton = explicitlyWaitFor_xPath("//*[@data-qa='create-account']",30);
+     clickByJS(createAccountButton);
      // 14. Verify that 'ACCOUNT CREATED!' is visible
      boolean accountCreated = driver.findElement(By.xpath("//b")).isDisplayed();
      Assert.assertTrue(accountCreated);
@@ -122,63 +121,23 @@ public class TC01_RegisterUserTest extends TestBase {
      // 16. Verify that 'Logged in as username' is visible
         waitFor(2000);
 
+        //  ***********************************  ATTENTION PLEASE **************************************
+        //There are two type iframes appear randomly: I cannot be able to handle by Automation. I closed by manually
+        // **********************************************************************************************
 
-        //There are two type iframes appear randomly:
-/*
-         if(driver.getCurrentUrl().contains("#google_vignette")){
-             try {
-                 Actions actions = new Actions(driver);
-                 actions.click(driver.findElement(By.xpath("//div[@id='dismiss-button']")));
-
-             } catch (Exception e) {
-                 throw new RuntimeException(e);
-
-             }
-         }
-
-
- */ //.switchTo().frame("ad_iframe")
-        List<String> frames = new ArrayList<>();
-        frames.add("aswift_2");
-        frames.add("aswift_3");
-        for ( String fName: frames) {
-            if (fName.equals("aswift_2")){
-                WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
-                wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("aswift_2")));
-                driver.switchTo().frame(fName).switchTo().frame("ad_iframe");
-                WebElement closeButton= driver.findElement(By.xpath("//div[@id='dismiss-button']"));
-                clickByJS(closeButton);
-                driver.switchTo().defaultContent();
-
-            } else if (fName.equals("aswift_3")) {
-                WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
-                wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("aswift_3")));
-                driver.switchTo().frame(fName).switchTo().frame("ad_iframe");
-                WebElement closeButton= driver.findElement(By.xpath("//div[@id='dismiss-button']"));
-                clickByJS(closeButton);
-                driver.switchTo().defaultContent();
-
-            }
-            else {
-                System.out.println("Advertisement does not exist");
-                   break;
-            }
-        }
-
-        WebElement loggedInAsElement = driver.findElement(By.xpath("//a[text()=' Logged in as ']"));
+        WebElement loggedInAsElement = explicitlyWaitFor_xPath("//a[text()=' Logged in as ']",5);
         String loggedInAs =loggedInAsElement.getText();
         System.out.println("loggedInAs = " + loggedInAs);
-
-
         waitFor(3000);
 
      // 17. Click 'Delete Account' button
-     driver.findElement(By.xpath("//a[@href='/delete_account']")).click();
 
+        WebElement deleteAccountButton = explicitlyWaitFor_xPath("//a[@href='/delete_account'])",3);
+        clickByJS(deleteAccountButton);
+        System.out.println(driver.getTitle());
      // 18. Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
-     Assert.assertTrue(driver.findElement(By.xpath("//*[text()='Account Deleted!']")).isDisplayed());
-     driver.findElement(By.xpath("//a[@data-qa='continue-button']")).click();
-
+     Assert.assertTrue(explicitlyWaitFor_xPath("//*[text()='Account Deleted!']",3).isDisplayed());
+     explicitlyWaitFor_xPath("//a[@data-qa='continue-button']",3).click();
 
     }
 

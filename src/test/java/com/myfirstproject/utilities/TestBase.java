@@ -56,7 +56,7 @@ public abstract class TestBase {
     @AfterClass
     public static void tearDownClass(){
 //        generate the report
-        extentReports.flush();
+        //extentReports.flush();
     }
     @Before
     public void setUp(){
@@ -69,10 +69,10 @@ public abstract class TestBase {
     @After
     public void tearDown(){
         waitFor(5000);
-        driver.quit();
+        //driver.quit();
     }
     /*
-    This method captures sscreenshot of the entire page
+    This method captures screenshot of the entire page
      */
     public void takeScreenshotOfTheEntirePage() throws IOException {
 //        1. TakeScreenShot class with getScreenShotAs method to capture the screenshot

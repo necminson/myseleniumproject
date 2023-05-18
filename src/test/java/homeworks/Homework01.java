@@ -6,9 +6,11 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
-import static com.myfirstproject.utilities.ReusableMethodsUtils.waitFor;
+import static com.myfirstproject.utilities.ReusableMethodsUtils.*;
 
 public class Homework01 extends TestBase {
     //Task01:
@@ -23,7 +25,7 @@ public class Homework01 extends TestBase {
 
         List<WebElement> images = driver.findElements(By.xpath("//img[@width='225'][@height='225']"));
         System.out.println("images = " + images);
-
+        //Print the page title of each page
         for (WebElement image: images ) {
 
             waitFor(5000);
@@ -34,86 +36,88 @@ public class Homework01 extends TestBase {
             driver.navigate().back();
 
         }
-    //Print the page title of each page
-    //Close the page
+        //Close the page  TestBase closes
 
     }
 
+//Task02: //    With 3 different test methods:
+    @Test
+    public void task02ATest(){
+        //  Create and Maximize the driver with the BeforeClass method and put implicit wait for 15 seconds (TestBase)
+        //    Go to http://www.google.com in the before method
+        driver.get("http://www.google.com");
+       //     -Type "Desktop" in the search box and print the number of results
+       WebElement searchBox = explicitlyWaitFor_id("APjFqb",30);
+       searchBox.sendKeys("Desktop");
+        driver.findElement(By.xpath("//input[@name='btnK']")).click();
+        WebElement resultsNum = explicitlyWaitFor_xPath("//div[@id='result-stats']",30);
+        System.out.println("Results Number = " + resultsNum.getText());
+        //    NOTE: Print the result numbers in After method (TestBase)
+        //    Close driver with AfterClass method (TestBase)
+    }
+    @Test
+    public void task02BTest(){
+        //  Create and Maximize the driver with the BeforeClass method and put implicit wait for 15 seconds (TestBase)
+        //    Go to http://www.google.com in the before method
+        driver.get("http://www.google.com");
+        //     -Type "Smartphone" in the search box and print the number of results
+        WebElement searchBox = explicitlyWaitFor_id("APjFqb",30);
+        searchBox.sendKeys("Smartphone");
+        driver.findElement(By.xpath("//input[@name='btnK']")).click();
+        WebElement resultsNum = explicitlyWaitFor_xPath("//div[@id='result-stats']",30);
+        System.out.println("Results Number = " + resultsNum.getText());
+        //    NOTE: Print the result numbers in After method  (TestBase)
+        //    Close driver with AfterClass method (TestBase)
+    }
+    @Test
+    public void task02CTest(){
+        //  Create and Maximize the driver with the BeforeClass method and put implicit wait for 15 seconds (TestBase)
+        //    Go to http://www.google.com in the before method
+        driver.get("http://www.google.com");
+        //     -Type "Laptop" in the search box and print the number of results
+        WebElement searchBox = explicitlyWaitFor_id("APjFqb",30);
+        searchBox.sendKeys("Laptop");
+        driver.findElement(By.xpath("//input[@name='btnK']")).click();
+        WebElement resultsNum = explicitlyWaitFor_xPath("//div[@id='result-stats']",30);
+        System.out.println("Results Number = " + resultsNum.getText());
+        //    NOTE: Print the result numbers in After method
+        //    Close driver with AfterClass method
+    }
 
-//Task02:
-    /*
-    Create and Maximize the driver with the BeforeClass method and put implicit wait for 15 seconds
-    Go to http://www.google.com in the before method
-    With 3 different test methods:
-     -Type "Desktop" in the search box and print the number of results
-     -Type "Smartphone" in the search box and print the number of results
-     -Type "Laptop" in the search box and print the number of results
-    NOTE: Print the result numbers in After method
-    Close driver with AfterClass method
-     */
+
 
 //Task03:
-    @Test
-    public void task03Test(){
 
-    //Go to https://amazon.com
-    driver.get(" https://amazon.com");
-    String windowHandle = driver.getWindowHandle();
-
-    //Print all the options in the 'All Departments' dropdown on the left side of the search box
-
-        WebElement dropDown = driver.findElement(By.xpath("//select[@id='searchDropdownBox']"));
-        Select options = new Select(dropDown);
-        options.getOptions().forEach(each-> System.out.println(each.getText()));
-        System.out.println("******************************************************");
-    //Search for each first five options and print titles
-       List<WebElement>  firstFiveOptions = driver.findElements(By.xpath("//div[@role='button']"));
-       firstFiveOptions.forEach(each-> System.out.println(each.getText()));
-       /*
-        for (int i=1;i<6 ;i++){
-            driver.findElement(By.xpath("//input[@id='twotabsearchtextbox']")).click();
-            waitFor(2000);
-            WebElement firstFiveOptions = driver.findElement(By.xpath("(//div[@role='button'])["+i+"]"));
-            waitFor(2000);
-            clickByJS(firstFiveOptions);
-            waitFor(2000);
-            System.out.println("firstFiveOptions titles = " + driver.getTitle());
-            waitFor(2000);
-            driver.switchTo().window(windowHandle);
-        }
-
-        */
-    }
         @Test
-    public void Test01(){
+    public void task03Test(){
             // Navigate to Amazon.com
             driver.get("https://www.amazon.com");
-
             // Locate the 'All Departments' dropdown
             WebElement dropdown = driver.findElement(By.id("searchDropdownBox"));
 
             // Print all the options in the dropdown
             Select select = new Select(dropdown);
+            ArrayList<String> optionsList = new ArrayList<>();
             for (WebElement option : select.getOptions()) {
-                System.out.println(option.getText());
+                optionsList.add(option.getText());
             }
+            System.out.println("optionsList = " + optionsList);
+            // Locate the search box and Search for each of the first five options and print the titles
+            for (int i = 0; i <5; i++) {
+                        // enter the selected option
+                WebElement searchBox = explicitlyWaitFor_id("twotabsearchtextbox",30);
+                        searchBox.sendKeys(optionsList.get(i));
+                        // Submit the search
+                        WebElement searchButton = driver.findElement(By.id("nav-search-submit-button"));
+                        searchButton.click();
+                        // Print the title of the first search result
+                        String firstResult = driver.getTitle();
+                        System.out.println("Title "+(i+1)+" : " + firstResult);
+                        waitFor(5000);
+                        driver.navigate().back();
+                    }
 
-            // Search for each of the first five options and print the titles
-            for (int i = 1; i <= 5; i++) {
-                select.selectByIndex(i);
 
-                // Locate the search box and enter the selected option
-                WebElement searchBox = driver.findElement(By.id("twotabsearchtextbox"));
-                searchBox.clear();
-                searchBox.sendKeys(select.getFirstSelectedOption().getText());
 
-                // Submit the search
-                WebElement searchButton = driver.findElement(By.id("nav-search-submit-button"));
-                searchButton.click();
-
-                // Print the title of the first search result
-                WebElement firstResult = driver.findElement(By.cssSelector(".sg-col-inner h2 a span"));
-                System.out.println("Title: " + firstResult.getText());
-            }
         }
 }

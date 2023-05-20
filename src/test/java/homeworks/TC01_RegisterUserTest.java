@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -123,6 +124,17 @@ public class TC01_RegisterUserTest extends TestBase {
 
         //  ***********************************  ATTENTION PLEASE **************************************
         //There are two type iframes appear randomly: I cannot be able to handle by Automation. I closed by manually
+        /*
+         Actions actions =  new Actions(driver);
+         waitFor(3000);
+         actions.moveByOffset(35,18).click().build().perform(); // (35,18) -- (115,35)
+         // iframe id="aswift_2"    ,     iframe id="ad_iframe"    ,
+
+        */
+
+
+
+
         // **********************************************************************************************
 
         WebElement loggedInAsElement = explicitlyWaitFor_xPath("//a[text()=' Logged in as ']",5);
@@ -132,7 +144,7 @@ public class TC01_RegisterUserTest extends TestBase {
 
      // 17. Click 'Delete Account' button
 
-        WebElement deleteAccountButton = explicitlyWaitFor_xPath("//a[@href='/delete_account'])",3);
+        WebElement deleteAccountButton = explicitlyWaitFor_xPath("//a[@href='/delete_account'])",5);
         clickByJS(deleteAccountButton);
         System.out.println(driver.getTitle());
      // 18. Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button

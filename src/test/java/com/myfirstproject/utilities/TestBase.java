@@ -62,14 +62,14 @@ public abstract class TestBase {
     public void setUp(){
         WebDriverManager.chromedriver().setup();
         driver= new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
 
     }
     @After
     public void tearDown(){
         waitFor(5000);
-        //driver.quit();
+        driver.quit();
     }
     /*
     This method captures screenshot of the entire page

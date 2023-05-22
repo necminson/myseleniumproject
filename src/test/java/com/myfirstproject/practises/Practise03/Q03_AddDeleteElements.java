@@ -1,14 +1,10 @@
-package com.myfirstproject.practises;
+package com.myfirstproject.practises.Practise03;
 
 import com.myfirstproject.utilities.TestBase;
-import org.bouncycastle.est.LimitedSource;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.w3c.dom.stylesheets.LinkStyle;
-
 import java.util.List;
-
 import static org.junit.Assert.assertEquals;
 
 public class Q03_AddDeleteElements extends TestBase {
@@ -24,14 +20,18 @@ public class Q03_AddDeleteElements extends TestBase {
         for (int i = 0; i < numOfAddedElement; i++) {
             addElement.click();
         }
-    // Click on the "Delete" button more than 20 times
+    // Click on the "Delete" button 20 times
+
           List<WebElement> deleteButtons =driver.findElements(By.xpath("//button[.='Delete']"));
         for (int i = 0; i < numOfDeletedElement; i++) {
             deleteButtons.get(i).click();
         }
-    //Assert that 20 buttons were deleted.
+
+    // Assert that 20 buttons were deleted.
+
         int sizeAfterDelete = driver.findElements(By.xpath("//button[.='Delete']")).size();
         int sizeBeforeDelete = deleteButtons.size();
         assertEquals(sizeBeforeDelete-numOfDeletedElement,sizeAfterDelete);
+
     }
 }

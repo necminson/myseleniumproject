@@ -30,6 +30,7 @@ public class ReusableMethodsUtils {
         return milis;
     }
 
+
     public static WebElement explicitlyWaitFor_xPath(String xPath,long seconds){
         try {
             WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(seconds));

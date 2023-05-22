@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.myfirstproject.utilities.ReusableMethodsUtils.waitFor;
+import static org.junit.Assert.assertEquals;
 
 public class Q05_ToDoList extends TestBase {
             /*
@@ -35,13 +36,23 @@ public class Q05_ToDoList extends TestBase {
       List<String> toDoList= new ArrayList<>(Arrays.asList("Prepare breakfast", "Wash the dishes", "Take care of baby", "Help your kid's homework", "Study Selenium", "Sleep"));
        WebElement toDoInput = driver.findElement(By.xpath("//input[@type='text']"));
          for (String w:  toDoList ) {
-            waitFor(3000);
+            waitFor(3);
             toDoInput.sendKeys(w+ Keys.ENTER);
+
          }
          //Strikethrough all todos.
 
+         List<WebElement> toDoListAfterAdd = driver.findElements(By.xpath("(//ul//li)"));
+         toDoListAfterAdd.forEach(each->each.click());
+
          //Delete all todos.
 
+         List<WebElement> deleteList = driver.findElements(By.xpath("//i[@class='fa fa-trash']"));
+         deleteList.forEach(each->each.click());
+            waitFor(3000);
         // Assert that all todos deleted.
+
+           List<WebElement> toDoListAfterDelete= driver.findElements(By.xpath("//ul//li"));
+           assertEquals(0,toDoListAfterDelete.size());
      }
 }

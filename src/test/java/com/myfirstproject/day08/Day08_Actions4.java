@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-import static com.myfirstproject.utilities.ReusableMethodsUtils.waitFor;
+import static com.myfirstproject.utilities.WaitForUtils.*;
 
 public class Day08_Actions4 extends TestBase {
         //Create a method dragAndDropTest

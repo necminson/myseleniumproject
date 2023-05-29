@@ -8,6 +8,9 @@ import org.openqa.selenium.WebElement;
 
 import java.io.IOException;
 
+import static com.myfirstproject.utilities.ScreenShotUtils.*;
+
+
 public class Day11_ExtentReportsScreenshot extends TestBase {
 
     @Test
@@ -22,7 +25,7 @@ public class Day11_ExtentReportsScreenshot extends TestBase {
                 .assignAuthor("Rufat","Necmettin","Neslihan")
                 .addScreenCaptureFromPath(takeScreenshotOfTheEntirePageAsString());
         //TAKE SCREENSHOT
-        takeScreenshotOfTheEntirePage();
+        takeScreenshotOfTheEntirePageAsString();
         driver.findElement(By.id("myCountry")).sendKeys("uni");
         Thread.sleep(2000);
 //        And select the ‘United Kingdom’ from the suggestions

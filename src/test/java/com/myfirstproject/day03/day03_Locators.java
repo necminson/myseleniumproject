@@ -11,7 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
 
-import static com.myfirstproject.utilities.ReusableMethodsUtils.waitFor;
+import static com.myfirstproject.utilities.WaitForUtils.*;
 
 public class day03_Locators {
     /*

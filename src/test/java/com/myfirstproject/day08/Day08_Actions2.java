@@ -5,7 +5,7 @@ import org.junit.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 
-import static com.myfirstproject.utilities.ReusableMethodsUtils.waitFor;
+import static com.myfirstproject.utilities.WaitForUtils.*;
 
 
 public class Day08_Actions2 extends TestBase {

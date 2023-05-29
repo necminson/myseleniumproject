@@ -21,7 +21,8 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
 
-import static com.myfirstproject.utilities.ReusableMethodsUtils.waitFor;
+import static com.myfirstproject.utilities.WaitForUtils.waitFor;
+
 
 public abstract class TestBase {
     protected static WebDriver driver;
@@ -30,6 +31,7 @@ public abstract class TestBase {
     protected static ExtentTest extentTest;
     @BeforeClass
     public static void extentReportsSetup(){
+        //************************* EXTENT REPORT SET UP *********************
 //        PATH
         String now = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
         String path = System.getProperty("user.dir")+"/test-output/Reports/"+now+"extent_reports.html";
@@ -53,6 +55,7 @@ public abstract class TestBase {
 //        **********CREATE EXTENT TEST THAT IS ALSO KNOWN AS LOGGER**
         extentTest=extentReports.createTest("MY REGRESSION","MY FIRST EXTENT REPORT");
     }
+    // ***************************************************************************************************
     @AfterClass
     public static void tearDownClass(){
 //        generate the report
@@ -71,47 +74,7 @@ public abstract class TestBase {
         waitFor(5000);
         driver.quit();
     }
-    /*
-    This method captures screenshot of the entire page
-     */
-    public void takeScreenshotOfTheEntirePage() throws IOException {
-//        1. TakeScreenShot class with getScreenShotAs method to capture the screenshot
-        File image = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-//        2. Create a path to save the image
-//        Create a date for giving dynamic name otherwise the screenshots overrides
-        String now = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());//getting local date in this format
-//                     CURRENT PROJECT FOLDER         foldername   subfoldername imagename
-        String path = System.getProperty("user.dir")+"/test-output/Screenshots/"+now+"image.png";
-//        3. Save the image in the path as a file
-        FileUtils.copyFile(image,new File(path));
-//        FileUtils.copyFile(FILE,FILE PATH); COPY FILE TO THAT FILE PATH
-    }
-    /*
-    This method captures screenshot of specific elements
-     */
-    public void takeScreenshotOfThisElement(WebElement element) throws IOException {
-        File image = element.getScreenshotAs(OutputType.FILE);
-        String now = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-        String path = System.getProperty("user.dir")+"/test-output/ElementScreenshot/"+now+"image.png";
-        FileUtils.copyFile(image,new File(path));
-    }
- /*
-    This method captures image and returns the path of that image
-    RETURN TYPE : static String
-    return new File(path).getAbsolutePath()
-     */
- public static String takeScreenshotOfTheEntirePageAsString() throws IOException {
-//        1. TakeScreenShot class with getScreenShotAs method to capture the screenshot
-     File image = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-//        2. Create a path to save the image
-//        Create a date for giving dynamic name otherwise the screenshots overrides
-     String now = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());//getting local date in this format
-//                     CURRENT PROJECT FOLDER         foldername   subfoldername imagename
-     String path = System.getProperty("user.dir")+"/test-output/Screenshots/"+now+"image.png";
-//        3. Save the image in the path as a file
-     FileUtils.copyFile(image,new File(path));
-//        GETTING THE ABSOLUTE PATH OF THE IMAGE PATH THAT IS STRING
-     return new File(path).getAbsolutePath();
- }
+
+
     }
 

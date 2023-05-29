@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
-import static com.myfirstproject.utilities.ReusableMethodsUtils.*;
+import static com.myfirstproject.utilities.WaitForUtils.*;
 
 public class Homework01 extends TestBase {
     //Task01:

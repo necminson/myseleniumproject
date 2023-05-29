@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 
 import java.util.Set;
 
-import static com.myfirstproject.utilities.ReusableMethodsUtils.waitFor;
+import static com.myfirstproject.utilities.WaitForUtils.*;
 
 public class Day07_WindowHandle1 extends TestBase {
 

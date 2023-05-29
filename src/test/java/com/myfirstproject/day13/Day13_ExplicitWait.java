@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-import static com.myfirstproject.utilities.ReusableMethodsUtils.*;
+import static com.myfirstproject.utilities.WaitForUtils.*;
 
 // Create a class:ExplicitWait
 public class Day13_ExplicitWait extends TestBase {

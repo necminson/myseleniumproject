@@ -7,15 +7,10 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.myfirstproject.utilities.ReusableMethodsUtils.*;
+import static com.myfirstproject.utilities.JSUtils.*;
+import static com.myfirstproject.utilities.WaitForUtils.*;
 
 public class TC01_RegisterUserTest extends TestBase {
     Faker faker;
@@ -32,8 +27,13 @@ public class TC01_RegisterUserTest extends TestBase {
     String expectedURL= "https://automationexercise.com/";
     Assert.assertEquals(expectedURL,actualURL);
     //  4. Click on 'Signup / Login' button
-    WebElement loginButton = driver.findElement(By.xpath("//*[@href='/login']"));
+    WebElement loginButton = explicitlyWaitForVisibility(By.xpath("//*[@href='/login']"),3);
+   // WebElement loginButton = driver.findElement(By.xpath("//*[@href='/login']"));
     clickByJS(loginButton);
+
+
+
+
     //  5. Verify 'New User Signup!' is visible
     boolean newUserSignUp = driver.findElement(By.xpath("(//h2)[3]")).isDisplayed();
     Assert.assertTrue(newUserSignUp);
@@ -124,16 +124,20 @@ public class TC01_RegisterUserTest extends TestBase {
 
         //  ***********************************  ATTENTION PLEASE **************************************
         //There are two type iframes appear randomly: I cannot be able to handle by Automation. I closed by manually
-        /*
-         Actions actions =  new Actions(driver);
-         waitFor(3000);
-         actions.moveByOffset(35,18).click().build().perform(); // (35,18) -- (115,35)
-         // iframe id="aswift_2"    ,     iframe id="ad_iframe"    ,
+        driver.getTitle();
+        try {
+           driver.switchTo().frame("aswift_2").switchTo().frame("ad_iframe");
+           waitFor(3000);
 
-        */
+           new Actions(driver)
+                   .moveByOffset(35,18)
+                   .click().build().perform();
+           driver.switchTo().defaultContent();
+       } catch (Exception e) {
+           throw new RuntimeException(e);
+       }
 
-
-
+         // iframe id="aswift_2"    ,     iframe id="ad_iframe"    ,    (35,18) OR (115,35)
 
         // **********************************************************************************************
 
@@ -144,9 +148,9 @@ public class TC01_RegisterUserTest extends TestBase {
 
      // 17. Click 'Delete Account' button
 
-        WebElement deleteAccountButton = explicitlyWaitFor_xPath("//a[@href='/delete_account'])",5);
+        WebElement deleteAccountButton = explicitlyWaitFor_xPath("//a[@href='/delete_account']",5);
         clickByJS(deleteAccountButton);
-        System.out.println(driver.getTitle());
+
      // 18. Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
      Assert.assertTrue(explicitlyWaitFor_xPath("//*[text()='Account Deleted!']",3).isDisplayed());
      explicitlyWaitFor_xPath("//a[@data-qa='continue-button']",3).click();

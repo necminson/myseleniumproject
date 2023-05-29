@@ -8,7 +8,7 @@ import org.openqa.selenium.By;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import static com.myfirstproject.utilities.ReusableMethodsUtils.waitFor;
+import static com.myfirstproject.utilities.WaitForUtils.*;
 //Create a class:FileDownloadTest
 
 public class Day09_FileDownloadTest extends TestBase {

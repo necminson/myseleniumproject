@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.myfirstproject.utilities.ScreenShotUtils.*;
+
 public class Day10_ExtentReports extends TestBase {
 
     @Test
@@ -33,7 +35,7 @@ public class Day10_ExtentReports extends TestBase {
 
     }
     @Test
-    public void extentReportsTest() throws IOException, InterruptedException {
+    public void extentReportsTest() throws Exception {
         //        Given user is on https://testcenter.techproeducation.com/index.php?page=autocomplete
         driver.get("https://testcenter.techproeducation.com/index.php?page=autocomplete");
 //        When user type “uni” in the search box

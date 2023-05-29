@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.WindowType;
 
-import static com.myfirstproject.utilities.ReusableMethodsUtils.waitFor;
+import static com.myfirstproject.utilities.WaitForUtils.*;
 
 public class Day07_WindowHandle2 extends TestBase {
         /*

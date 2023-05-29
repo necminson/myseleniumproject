@@ -1,20 +1,19 @@
 package com.myfirstproject.day12;
 
 import com.myfirstproject.utilities.TestBase;
-import static com.myfirstproject.utilities.ReusableMethodsUtils.*;
+import static com.myfirstproject.utilities.JSUtils.*;
+import static com.myfirstproject.utilities.ScreenShotUtils.*;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.io.IOException;
-
-
 
 public class Day12_JSExecutor extends TestBase {
 
     @Test
-    public void scrollIntoViewTest() throws IOException {
+    public void scrollIntoViewTest() throws Exception {
         driver.get("https://www.amazon.com");
 //        Location footer element on amazon page
         WebElement footer = driver.findElement(By.xpath("//div[@id='navFooter']//tbody"));
@@ -34,7 +33,7 @@ public class Day12_JSExecutor extends TestBase {
         takeScreenshotOfTheEntirePage();
     }
     @Test
-    public void scrollAllTheWayUpDownTest() throws IOException, InterruptedException {
+    public void scrollAllTheWayUpDownTest() throws Exception {
         driver.get("https://www.amazon.com");
 //        scroll all the way down and take a screenshot of the page
         scrollAllTheWayDownJS();
@@ -44,7 +43,7 @@ public class Day12_JSExecutor extends TestBase {
         takeScreenshotOfTheEntirePage();
     }
     @Test
-    public void clickByJSTest() throws InterruptedException, IOException {
+    public void clickByJSTest() throws Exception {
 //        search porcelain tea set on amazon
         driver.get("https://www.amazon.com");
 //        location search box

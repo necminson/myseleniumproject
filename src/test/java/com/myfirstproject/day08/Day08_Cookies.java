@@ -6,7 +6,7 @@ import org.openqa.selenium.Cookie;
 
 import java.util.Set;
 
-import static com.myfirstproject.utilities.ReusableMethodsUtils.waitFor;
+import static com.myfirstproject.utilities.WaitForUtils.*;
 
 public class Day08_Cookies extends TestBase {
 

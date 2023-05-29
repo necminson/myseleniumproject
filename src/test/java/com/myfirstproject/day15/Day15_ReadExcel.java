@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.myfirstproject.utilities.ReusableMethodsUtils.waitFor;
+import static com.myfirstproject.utilities.WaitForUtils.*;
 import static org.junit.Assert.assertEquals;
 
 public class Day15_ReadExcel {
@@ -61,6 +61,9 @@ public class Day15_ReadExcel {
                 capitalOfCountry.put(country,capital);
         }
         System.out.println("capitalOfCountry = " + capitalOfCountry);
-
+//    Close the file
+        fileInputStream.close();
+//    Close the workbook
+        workbook.close();
     }
 }

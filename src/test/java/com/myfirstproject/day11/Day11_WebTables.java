@@ -10,6 +10,8 @@ import org.openqa.selenium.WebElement;
 import java.io.IOException;
 import java.util.List;
 
+import static com.myfirstproject.utilities.ScreenShotUtils.takeScreenshotOfTheEntirePageAsString;
+
 //Create a class: WebTables
 public class Day11_WebTables extends TestBase {
 
@@ -47,7 +49,7 @@ public class Day11_WebTables extends TestBase {
     //    Task 4 : Print column 5 data in the table body
 
         @Test
-    public void printColumns() throws IOException {
+    public void printColumns() throws Exception {
             driver.get("https://the-internet.herokuapp.com/tables");
             extentTest
                     .pass("Taking the screenshot of the home page")

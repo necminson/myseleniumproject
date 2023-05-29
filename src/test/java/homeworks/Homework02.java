@@ -3,12 +3,13 @@ package homeworks;
 import com.myfirstproject.utilities.TestBase;
 import org.junit.Test;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 
-import static com.myfirstproject.utilities.ReusableMethodsUtils.*;
+import static com.myfirstproject.utilities.JSUtils.*;
+import static com.myfirstproject.utilities.WaitForUtils.explicitlyWaitFor_xPath;
+import static com.myfirstproject.utilities.WaitForUtils.waitFor;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -65,8 +66,7 @@ public class Homework02 extends TestBase {
         driver.get("https://www.jqueryscript.net/demo/Easy-iFrame-based-Twitter-Emoji-Picker-Plugin-jQuery-Emoojis/");
     // Click on the "Animals and Nature" emoji
         driver.switchTo().frame("emoojis");
-        WebElement animalsAndNature =  explicitlyWaitFor_xPath("//a[@href='#nature']",5);
-        clickByJS(animalsAndNature);
+        clickByJS(explicitlyWaitFor_xPath("//a[@href='#nature']",5));
     // Print emojis under "Animals and Nature" emoji
         List<WebElement> natureList = driver.findElements(By.xpath("//div[@id='nature']//div"));
         natureList.forEach(each-> System.out.println(each.getText()));

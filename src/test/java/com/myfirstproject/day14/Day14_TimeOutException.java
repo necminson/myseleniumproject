@@ -4,8 +4,8 @@ import com.myfirstproject.utilities.TestBase;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
-import static com.myfirstproject.utilities.ReusableMethodsUtils.explicitlyWaitFor_id;
-import static com.myfirstproject.utilities.ReusableMethodsUtils.waitForVisibility;
+
+import static com.myfirstproject.utilities.WaitForUtils.*;
 
 public class Day14_TimeOutException extends TestBase {
     @Test
@@ -31,13 +31,13 @@ public class Day14_TimeOutException extends TestBase {
 //          BUT waitForVisibility(By by ,15); throws TimeOutException
 //        NOTE: When we use driver with explicit wait, we get no such element exception otherwise timeout exception
 //        CASE 1
-        waitForVisibility(driver.findElement(By.name("twotabsearchtextbox")),15);
+        explicitlyWaitForVisibility(driver.findElement(By.name("twotabsearchtextbox")),15);
         //1. Explicit wait
         //2. Failing
         //3. Using driver in the explicit wait:
         //4. Getting : NoSuchElementException
 //       CASE 2
-        waitForVisibility(By.id("wrong-fake-id"),25);
+        explicitlyWaitForVisibility(By.id("wrong-fake-id"),25);
         //1. Explicit wait
         //2. Failing
         //3. Not using driver in the explicit wait

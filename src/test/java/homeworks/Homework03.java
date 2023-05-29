@@ -2,21 +2,20 @@ package homeworks;
 
 import com.github.javafaker.Faker;
 import com.myfirstproject.utilities.TestBase;
-import com.myfirstproject.utilities.instructorAhmetsUtilities.AllCreatedMethodUtils;
-import org.junit.Assert;
-import org.junit.Test;
-import org.openqa.selenium.By;
+import org.junit.*;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
+import java.nio.file.*;
+import java.util.List;
+import static com.myfirstproject.utilities.CheckboxUtils.*;
+import static com.myfirstproject.utilities.JSUtils.*;
+import static com.myfirstproject.utilities.RadioButtonUtils.*;
+import static com.myfirstproject.utilities.ScreenShotUtils.*;
+import static com.myfirstproject.utilities.WaitForUtils.*;
+import static org.junit.Assert.*;
 
-import static com.myfirstproject.utilities.CheckboxUtils.clickAllCheckboxes;
-import static com.myfirstproject.utilities.CheckboxUtils.clickCheckboxByIndex;
-import static com.myfirstproject.utilities.JSUtils.scrollAllTheWayDownJS;
-import static com.myfirstproject.utilities.RadioButtonUtils.clickRadioByIndex;
-import static com.myfirstproject.utilities.ScreenShotUtils.takeScreenshotOfTheEntirePage;
-import static com.myfirstproject.utilities.WaitForUtils.explicitlyWaitForVisibility;
-import static org.junit.Assert.assertEquals;
 
 public class Homework03 extends TestBase {
 
@@ -46,7 +45,7 @@ public class Homework03 extends TestBase {
                     assertEquals("Perfect!",explicitlyWaitForVisibility(By.xpath("//a[.='Perfect!']"),2).getText());
     }
     @Test
-    public void task08()  {
+    public void task08(){
 
        /*
     Given
@@ -88,7 +87,7 @@ public class Homework03 extends TestBase {
 
     }
     @Test
-    public void task09(){
+    public void task09() throws Exception {
        /*
 Given
  Go to  https://www.saucedemo.com/
@@ -115,6 +114,38 @@ When
 Then
  Assert that CHECKOUT: COMPLETE!
 */
+     // Go to  https://www.saucedemo.com/
+        driver.get("https://www.saucedemo.com/");
+     // Enter the username  as "standard_user"
+        explicitlyWaitForVisibility(By.id("user-name"),3).sendKeys("standard_user");
+     // Enter the password as "secret_sauce"
+        explicitlyWaitForVisibility(By.id("password"),3).sendKeys("secret_sauce");
+     // Click on login button
+        explicitlyWaitForVisibility(By.id("login-button"),3).click();
+     // Add all products to cart
+        List<WebElement> addToCart = driver.findElements(By.xpath("//button[contains(.,'Add to cart')]"));
+        addToCart.forEach(eachCart-> eachCart.click());
+     // Go to cart
+        explicitlyWaitForVisibility(By.xpath("//*[@class='shopping_cart_link']"),3).click();
+     // Click on checkout
+        explicitlyWaitForVisibility(By.xpath("//button[@id='checkout']"),3).click();
+     // Fill your information
+        explicitlyWaitForVisibility(By.id("first-name"),3).sendKeys(Faker.instance().name().firstName());
+        explicitlyWaitForVisibility(By.id("last-name"),3).sendKeys(Faker.instance().name().lastName());
+        explicitlyWaitForVisibility(By.id("postal-code"),3).sendKeys(Faker.instance().address().zipCode());
+     // Click on continue
+        explicitlyWaitForVisibility(By.id("continue"),3).click();
+     // Assert that total price is $140.34
+        String actualTotalPrice = driver.findElement(By.xpath("//div[@class='summary_info_label summary_total_label']")).getText();
+        assertEquals("Total: $140.34",actualTotalPrice);
+        extentTest.
+                pass("Visibility of 'Total: $140.34' is verifed").
+                addScreenCaptureFromPath(takeScreenshotOfTheEntirePageAsString(),"Total Price");
+        // Click on finish
+        explicitlyWaitForVisibility(By.id("finish"),3).click();
+     // Assert that CHECKOUT: COMPLETE!
+        String complete = explicitlyWaitForVisibility(By.xpath("//h2[@class='complete-header']"),3).getText();
+        assertEquals("Thank you for your order!",complete);
     }
     @Test
     public void task10(){
@@ -125,7 +156,15 @@ Then
       Click on "click me" button
   Then
       Verify that "Event Triggered"
-   */
+    */
+      //      Go to https://testpages.herokuapp.com/styled/challenges/growing-clickable.html
+                driver.get("https://testpages.herokuapp.com/styled/challenges/growing-clickable.html");
+      //      Click on "click me" button
+                waitFor(9999);
+                explicitlyWaitForVisibility(By.xpath("//button[@id='growbutton']"),5).click();
+      //      Verify that "Event Triggered"
+                String eventText = explicitlyWaitForVisibility(By.id("growbuttonstatus"),5).getText();
+                assertEquals("Event Triggered",eventText);
     }
     @Test
     public void task11(){
@@ -139,6 +178,15 @@ And
 Then
    Verify that file is downloaded
 */
+        //   Go to https://testpages.herokuapp.com/
+            driver.get("https://testpages.herokuapp.com/");
+        //   Click on File Downloads
+            explicitlyWaitForVisibility(By.xpath("//a[@id='download']"),5).click();
+        //   Click on Server
+            explicitlyWaitForVisibility(By.xpath("//button[@id='server-download']"),5).click();
+            waitFor(5000);
+        //   Verify that file is downloaded
+            assertTrue(Files.exists(Paths.get(System.getProperty("user.home")+"\\Downloads\\textfile.txt")));
     }
     @Test
     public void task12(){
